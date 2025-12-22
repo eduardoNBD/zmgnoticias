@@ -1,0 +1,28 @@
+/*
+    Theme Name: ZMG Theme
+    Description: Un tema de WordPress que utiliza TailwindCSS para el dise単o y estilos.
+    Version: 1.0.0
+    Author: EduardoNDB
+    Text Domain: ZMG
+    Requires at least: 5.0
+    Tested up to: 6.4
+    Requires PHP: 7.4
+    License: GPL v2 or later
+    License URI: https://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+ins{
+    text-align:center;
+    margin-bottom:4px;
+}
+
+ins iframe {
+    width: 100% !important;
+    border-radius: 10px;
+    border: 1px solid #eaeaea !important;
+}
+
+ins > div {
+    width: 90% !important;
+}
+ 

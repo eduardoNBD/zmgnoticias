@@ -1,0 +1,6 @@
+.datepicker{min-width: 300px; width: 300px;}#rowDateTime .datepicker{ width: 100%;}.datepicker-picker,.datepicker-picker .days,.datepicker-picker .days-of-week,.datepicker-grid {width: 100% !important}.datepicker-picker{box-shadow: 0px 0px 7px 0px #00000055 !important;}
+.calendar_background {background-color: #ffffff !important;}
+.datepicker-header .datepicker-controls{border-bottom: 2px solid #27C195;}
+.datepicker-cell{padding: 5px;margin: 4px;}
+.datepicker-cell.next{color: #a0a0a0;}
+.datepicker-cell.focused,.datepicker-cell:hover{background-color: #1cc0f2; color:white}

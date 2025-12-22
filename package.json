@@ -1,0 +1,36 @@
+{
+  "name": "ZMG_Theme",
+  "version": "1.0.0",
+  "description": "Un tema de WordPress moderno que utiliza TailwindCSS",
+  "main": "index.js",
+  "scripts": {
+    "compileTailwind": "npx tailwindcss -o dist/css/build.css --minify"
+  },
+  "keywords": [
+    "wordpress",
+    "theme",
+    "tailwindcss",
+    "responsive",
+    "modern"
+  ],
+  "author": "eduardoNBD",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "^10.4.16",
+    "clean-css": "^5.3.3",
+    "fs-extra": "^11.3.2",
+    "path": "^0.12.7",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.3.6",
+    "uglify-js": "^3.19.3"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

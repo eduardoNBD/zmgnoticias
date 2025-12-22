@@ -1,0 +1,6 @@
+.content a{color: #007bff;&&:hover {color: #0056b3;text-decoration: underline;}} 
+.content blockquote {background-color: #F5F5F5;padding: 1rem;border-left: 4px solid #27C195;margin-block: 1rem;}
+.content em {font-style: italic;font-weight: bold;}
+.content,.content p{margin-block: 1rem;}
+.content h2{font-size: 29px;font-weight: 500;}
+.content h3{font-size: 21px;font-weight: 500;}
