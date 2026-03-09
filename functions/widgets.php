@@ -64,11 +64,19 @@ class last_posts_week_Widget extends WP_Widget {
             echo '<h3 class="text-lg font-semibold text-gray-900 mb-3">' . esc_html($title) . '</h3>';
         }
 
+        // Detectar post actual para excluirlo
+        $current_post_id = get_queried_object_id();
+        $exclude_posts = [];
+        
+        if (is_singular('post') && $current_post_id) {
+            $exclude_posts[] = $current_post_id;
+        }
+
         // Fechas de esta semana
-        $inicio_semana = date('Y-m-d', strtotime('monday this week'));
+        $inicio_semana = date('Y-m-d', strtotime('-10 days'));
         $hoy = date('Y-m-d');
 
-        // Consulta
+        // Consulta con filtro de fecha y exclusión del post actual
         $query_args = [
             'post_type'      => 'post',
             'posts_per_page' => $qty, 
@@ -76,6 +84,14 @@ class last_posts_week_Widget extends WP_Widget {
             'orderby'        => 'meta_value_num date',
             'order'          => 'DESC',
             'ignore_sticky_posts' => true,
+            'date_query'     => [
+                [
+                    'after'     => $inicio_semana . ' 00:00:00',
+                    'before'    => $hoy . ' 23:59:59',
+                    'inclusive' => true,
+                ]
+            ],
+            'post__not_in'   => $exclude_posts,
         ];
 
         $query = new WP_Query($query_args);
@@ -88,6 +104,9 @@ class last_posts_week_Widget extends WP_Widget {
                 $post_id = get_the_ID();
                 $permalink = get_permalink();
                 $title = get_the_title();
+                $author_id = get_the_author_meta('ID');
+                $author_name = get_the_author();
+                $author_url = $author_id ? get_author_posts_url($author_id) : '';
                 $views = intval(get_post_meta($post_id, 'post_views', true));
                 $views = $views ?: 0;
                 $excerpt = wp_trim_words(get_the_excerpt(), 20, '...');
@@ -107,8 +126,21 @@ class last_posts_week_Widget extends WP_Widget {
                 }
 
                 echo '<div class="p-3">';
+                $author_html = $author_url
+                    ? '<a class="hover:underline" href="' . esc_url($author_url) . '">' . esc_html($author_name) . '</a>'
+                    : esc_html($author_name);
+                echo '<div class="flex justify-between text-xs font-semibold px-2 py-1 rounded text-gray-600">'
+                    . '<span>' . get_the_date() . '</span>'
+                    . '<span class="flex gap-2 items-center">'
+                        . '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>'
+                        . number_format($views, 0, ',')
+                    . '</span>'
+                . '</div>';
                 echo '<a href="' . esc_url($permalink) . '" class="block text-base font-semibold text-gray-900 hover:underline">' . esc_html($title) . '</a>';
                 echo '<p class="text-sm text-gray-600 mt-1">' . esc_html($excerpt) . '</p>';
+                echo '<div class="flex justify-end text-xs font-semibold px-2 py-1 rounded text-gray-600 mt-2">
+                    <span>' . $author_html . '</span>
+                </div>';
                 echo '</div>';
                 echo '</article>';
             }

@@ -5,7 +5,9 @@
         $featured_img_url = get_template_directory_uri() . '/img/default-hero.jpg';
     }
 
+    $author_id = get_the_author_meta('ID');
     $author_name = get_the_author_meta('display_name');
+    $author_url = $author_id ? get_author_posts_url($author_id) : '';
     $publish_date = get_the_date();
 
     $prev_post = get_previous_post();
@@ -20,9 +22,9 @@
                 <img src="<?=$featured_img_url ?>" alt="<?php the_title(); ?>" class="w-full h-auto mt-4">
 
                 <!-- Meta info -->
-                <div class="my-4 text-sm text-gray-600">
-                    <span class="italic">Publicado en</span> <strong><?= esc_html($publish_date) ?></strong> 
-                    <span class="italic ml-4">Publicado por</span> <strong><?= esc_html($author_name) ?></strong>
+                <div class="my-4 text-sm text-gray-600 flex justify-between">
+                    <span class="italic">Publicado el <strong><?= esc_html($publish_date) ?></strong></span>
+                    <span class="italic">Publicado por <?php if ($author_url) { ?><a href="<?= esc_url($author_url) ?>"><strong><?= esc_html($author_name) ?></strong></a><?php } else { ?><strong><?= esc_html($author_name) ?></strong><?php } ?></span>
                 </div>
                 
                 <!-- Sección Compartir -->

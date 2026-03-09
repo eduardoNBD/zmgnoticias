@@ -13,6 +13,9 @@
         if ( ! $featured_img_url ) {
             $featured_img_url = get_template_directory_uri() . '/img/default-hero.jpg'; // imagen por defecto
         }
+        $author_id = isset($post->post_author) ? (int) $post->post_author : 0;
+        $author_name = $author_id ? get_the_author_meta('display_name', $author_id) : '';
+        $author_url = $author_id ? get_author_posts_url($author_id) : '';
         $categories = get_the_category($post->ID);
         $first_cat = !empty($categories) ? $categories[0]->name : '';
         ?>
@@ -30,6 +33,11 @@
                 <?php endif; ?>
                 <hr class="my-4">
                 <a href="<?=get_permalink($post->ID) ?>" class="text-xl md:text-3xl font-bold px-4 text-shadow-md"><?=$post->post_title ?></a>
+                <?php if ($author_url && $author_name) : ?>
+                    <div class="mt-2 text-sm px-4">
+                        <a href="<?= esc_url($author_url) ?>" class="hover:underline font-semibold"><?= esc_html($author_name) ?></a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
         </div>
