@@ -115,15 +115,19 @@ class last_posts_week_Widget extends WP_Widget {
                 $category_link = !empty($category) ? get_category_link($category[0]->term_id) : '#';
                 $thumb = get_the_post_thumbnail_url($post_id, 'medium_large');
 
-                echo '<article class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition mx-4">';
-                if ($thumb) {
-                    echo '<a href="' . esc_url($permalink) . '" class="block relative">';
-                    echo '<img src="' . esc_url($thumb) . '" alt="' . esc_attr($title) . '" class="w-full h-48 object-cover">';
-                    if ($category_name) {
-                        echo '<span class="absolute bottom-2 left-2 bg-black/80 text-white text-xs font-semibold px-2 py-1 rounded">' . esc_html($category_name) . '</span>';
-                    }
-                    echo '</a>';
+                if (!$thumb) {
+                    $thumb = zmg_get_default_image_url();
                 }
+                
+                echo '<article class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition mx-4">';
+                
+                echo '<a href="' . esc_url($permalink) . '" class="block relative">';
+                echo '<img src="' . esc_url($thumb) . '" alt="' . esc_attr($title) . '" class="w-full h-48 object-cover">';
+                if ($category_name) {
+                    echo '<span class="absolute bottom-2 left-2 bg-black/80 text-white text-xs font-semibold px-2 py-1 rounded">' . esc_html($category_name) . '</span>';
+                }
+                echo '</a>';
+                
 
                 echo '<div class="p-3">';
                 $author_html = $author_url

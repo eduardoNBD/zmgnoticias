@@ -5,7 +5,7 @@
                 <?php
                     $featured_img_url = get_the_post_thumbnail_url( $post->ID, 'medium' );
                     if ( ! $featured_img_url ) {            
-                        $featured_img_url = get_template_directory_uri() . '/img/default-thumbnail.jpg'; // imagen por defecto
+                        $featured_img_url = zmg_get_default_image_url(); // imagen por defecto
                     }
                 ?>
                 <a href="<?=get_permalink($post->ID) ?>">

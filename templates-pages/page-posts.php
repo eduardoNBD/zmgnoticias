@@ -45,7 +45,7 @@
                     while ( have_posts() ) : the_post();
                         $featured_img_url = get_the_post_thumbnail_url( $post->ID, 'medium' );
                         if ( ! $featured_img_url ) {
-                            $featured_img_url = get_template_directory_uri() . '/img/default.jpg';
+                            $featured_img_url = zmg_get_default_image_url();
                         }
                         ?>
                         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">

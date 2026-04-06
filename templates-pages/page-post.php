@@ -2,7 +2,7 @@
     $featured_img_url = get_the_post_thumbnail_url( $post->ID, 'full' );
 
     if ( ! $featured_img_url ) {
-        $featured_img_url = get_template_directory_uri() . '/img/default-hero.jpg';
+        $featured_img_url = zmg_get_default_image_url();
     }
 
     $author_id = get_the_author_meta('ID');

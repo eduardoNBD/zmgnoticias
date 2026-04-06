@@ -10,8 +10,8 @@
     foreach ( $slider_posts as $index => $post ) :
         $featured_img_url = get_the_post_thumbnail_url( $post->ID, 'full' );
 
-        if ( ! $featured_img_url ) {
-            $featured_img_url = get_template_directory_uri() . '/img/default-hero.jpg'; // imagen por defecto
+        if ( ! $featured_img_url ) { 
+            $featured_img_url = zmg_get_default_image_url();
         }
         $author_id = isset($post->post_author) ? (int) $post->post_author : 0;
         $author_name = $author_id ? get_the_author_meta('display_name', $author_id) : '';

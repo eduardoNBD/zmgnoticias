@@ -19,7 +19,10 @@
     <?php
       $thumb_id = get_post_thumbnail_id($featured->ID);
       $thumb_url = $thumb_id ? wp_get_attachment_image_url($thumb_id, 'large') : '';
-      echo "thumb_id ".$thumb_id." thumb_url ".$thumb_url;
+      
+      if(!$thumb_url) {
+        $thumb_url = zmg_get_default_image_url();
+      }
     ?>
     <div 
       class="absolute inset-0 top-2 bg-cover bg-center"
@@ -67,6 +70,10 @@
       <?php
       $thumb_id = get_post_thumbnail_id($post->ID);
       $thumb_url = $thumb_id ? wp_get_attachment_image_url($thumb_id, 'medium') : '';
+
+      if(!$thumb_url) {
+        $thumb_url = zmg_get_default_image_url();
+      }
       $categories = get_the_category($post->ID);
       $first_cat = !empty($categories) ? $categories[0]->name : '';
       ?>

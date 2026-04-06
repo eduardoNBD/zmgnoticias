@@ -476,3 +476,31 @@ if ($modules) {
         require_once $module;
     }
 }
+
+/**
+ * Obtener la URL del logo del sitio para usar como fallback
+ * 
+ * @return string URL del logo o imagen por defecto
+ */
+function zmg_get_logo_url() {
+    // Verificar si hay un logo personalizado configurado
+    if (has_custom_logo()) {
+        $custom_logo_id = get_theme_mod('custom_logo');
+        $logo_url = wp_get_attachment_image_url($custom_logo_id, 'full');
+        if ($logo_url) {
+            return $logo_url;
+        }
+    }
+    
+    // Fallback a imagen por defecto si no hay logo personalizado
+    return get_template_directory_uri() . '/img/default-hero.jpg';
+}
+
+/**
+ * Obtener la URL de la imagen por defecto (default.webp)
+ * 
+ * @return string URL de la imagen default.webp
+ */
+function zmg_get_default_image_url() {
+    return get_template_directory_uri() . '/assets/img/default.webp';
+}
